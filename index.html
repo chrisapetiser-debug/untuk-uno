@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For my lovely girlfriend ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', Helvetica;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9aa2,#fecfef,#ffc3a0);
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+    overflow-x:hidden;
+    padding:20px;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    backdrop-filter:blur(10px);
+    z-index:-1;
+}
+
+h1{
+    margin-top:30px;
+    color:white;
+    font-size:clamp(22px,5vw,32px);
+    text-align:center;
+    text-shadow:0 4px 20px rgba(0,0,0,0.3);
+    transition:0.4s;
+}
+
+.container{
+    margin-top:40px;
+    perspective:1500px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.envelope{
+    width:clamp(260px,80vw,320px);
+    height:200px;
+    background:white;
+    position:relative;
+    border-radius:12px;
+    cursor:pointer;
+    box-shadow:0 15px 40px rgba(0,0,0,0.3);
+    transition:0.5s;
+    overflow:hidden;
+}
+
+.envelope.open{
+    background:transparent;
+    box-shadow:none;
+}
+
+.flap{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#ff6f91;
+    clip-path:polygon(0 0, 100% 0, 50% 50%);
+    transform-origin:top;
+    transition:1s;
+    border-radius:12px 12px 0 0;
+    z-index:2;
+}
+
+.envelope.open .flap{
+    transform:rotateX(180deg);
+}
+
+.letter{
+    position:absolute;
+    width:90%;
+    height:170px;
+    background:white;
+    top:60%;
+    left:5%;
+    border-radius:10px;
+    padding:25px;
+    font-size:15px;
+    overflow-y:auto;
+    transition:1s ease;
+    opacity:0;
+    z-index:1;
+}
+
+.envelope.open .letter{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    border-radius:0;
+    padding:50px 30px;
+    opacity:1;
+    z-index:999;
+    animation:slideUp 0.8s ease forwards;
+}
+
+@keyframes slideUp{
+    from{transform:translateY(100%);}
+    to{transform:translateY(0);}
+}
+
+.hide{
+    display:none !important;
+}
+
+.bottom-text{
+    margin-top:40px;
+    color:white;
+    font-size:clamp(16px,4vw,20px);
+    text-align:center;
+}
+
+.gallery{
+    margin-top:50px;
+    width:90%;
+    max-width:400px;
+    position:relative;
+}
+
+.gallery img{
+    width:100%;
+    border-radius:20px;
+    display:none;
+}
+
+.gallery img.active{
+    display:block;
+}
+
+.gallery button{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(255,255,255,0.7);
+    border:none;
+    font-size:20px;
+    padding:8px 12px;
+    cursor:pointer;
+    border-radius:50%;
+}
+
+.prev{left:10px;}
+.next{right:10px;}
+
+/* Virtual Hug Button */
+.hug-btn{
+    margin-top:30px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:#ff6f91;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.hug-btn:hover{
+    background:#ff4f7b;
+    transform:scale(1.05);
+}
+
+/* Floating Emoji */
+.hug-emoji{
+    position:fixed;
+    font-size:30px;
+    animation:floatUp 3s linear forwards;
+    z-index:2000;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-200px) scale(1.5);
+        opacity:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<h1 id="title">Hati-hati di Jalan Sayangku! 🌸</h1>
+
+<div class="container">
+    <div class="envelope" onclick="toggleLetter()">
+        <div class="flap"></div>
+        <div class="letter">
+            <div id="typedText"></div>
+            <button class="hug-btn" onclick="sendHug(event)">Virtual Hug 🤗</button>
+        </div>
+    </div>
+</div>
+
+<div class="bottom-text" id="bottomText">Semangat Jamborenya Sayang! 🎉</div>
+
+<div class="gallery" id="gallery">
+    <button class="prev" onclick="prevSlide();event.stopPropagation();">❮</button>
+    <img src="1.jpeg" class="active">
+    <img src="2.jpeg">
+    <img src="3.jpeg">
+    <img src="4.jpeg">
+    <img src="5.jpeg">
+    <img src="6.jpeg">
+    <img src="7.jpeg">
+    <img src="8.jpeg">
+    <img src="9.jpeg">
+    <img src="10.jpeg">
+    <img src="11.jpeg">
+    <img src="12.jpeg">
+    <img src="13.jpeg">
+    <img src="14.jpeg">
+    <img src="15.jpeg">
+    <img src="16.jpeg">
+    <img src="17.jpeg">
+    <img src="18.jpeg">
+    <img src="19.jpeg">
+    <button class="next" onclick="nextSlide();event.stopPropagation();">❯</button>
+</div>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="My Everything.mp3">
+</audio>
+
+<script>
+let opened = false;
+let typingTimeout;
+let musicStarted = false;   
+
+const text = `Dear Nathanea Uno K. or also known as My babyy or My Princess ❤️
+
+Pertama-tama aku mau minta maaf karena aku ngetik pesan ini buat kamu dan ga biasanya lewat pesan kayak gini huhuhuhu :(
+I want to say thank you for your effort and hardwork selama ini untuk mempersiapkan jambore 
+Aku tahu jambore ini penting buat kamu, dan aku bangga banget sama kamu.. Gapernah mengenal lelah dan selalu berusaha untuk nunjukin kalo kamu yang terbaik! 
+Jangan lupa makan yang teratur, minum yang cukup, dan beristirahat yaa! dan yang terpenting adalah jangan lupa minum obat ya sayangg 
+Aku bersyukur mengenalmu dengan karakter yang pantang menyerah dan mau berusaha. 
+I'm so proud to have you dan aku senang bisa hadir untukmu :D 
+Kalau nanti kamu capek dan takut saat solo night nanti, ingat ada aku yang selalu doain kamu dari sini. 
+Ada aku, timmy, dan semua orang yang kamu sayang yang menunggu kamu pulang membawa banyak cerita untuk diceritakan! 
+
+Aku sedih karena kita gabisa ketemu lebih lama dan spend time bersama-sama :( 
+I'll miss you soo muchh Aku bakal bingung selama 4 hari ini tanpa kamu apa aku bisa? kemaren waktu kamu LKIA aja aku nangis.. 
+Semangat ya sayanggku, you can do it! Aku percaya kamu bisa lewatin semuanya dengan semangat dan senyum kamu itu. 
+Hati-hati di perjalanan, jaga diri kamu baik-baik ya sayangg 
+Aku nunggu kamu pulang dengan cerita-cerita seru nanti 🤍 
+Aku sayang kamu selalu, dimanapun, kapanpun kamu berada :) 
+Kalau kamu gabisa tidur, selalu inget bahwa kita selalu menatap di langit yang sama 🥰 
+I love you baby, good morningg, good afternoon, and good night yaa.. 
+
+Semangattttt, Mwahhh 
+
+From your lovely boyfriend, 
+Topher 🍪`;
+
+// START MUSIC (fix autoplay restriction)
+function startMusic(){
+    const music = document.getElementById("bgMusic");
+    if(!musicStarted){
+        music.volume = 1; // biar lembut
+        music.play();
+        musicStarted = true;
+    }
+}
+
+// OPEN CLOSE
+function toggleLetter(){
+    startMusic(); // mulai musik saat pertama klik
+
+    const envelope = document.querySelector('.envelope');
+    const title = document.getElementById('title');
+    const gallery = document.getElementById('gallery');
+    const bottomText = document.getElementById('bottomText');
+    const typedText = document.getElementById('typedText');
+
+    if(!opened){
+        opened = true;
+        envelope.classList.add('open');
+        gallery.classList.add('hide');
+        bottomText.classList.add('hide');
+        title.classList.add('hide');
+        typeWriter();
+    } else {
+        opened = false;
+        envelope.classList.remove('open');
+        gallery.classList.remove('hide');
+        bottomText.classList.remove('hide');
+        title.classList.remove('hide');
+        clearTimeout(typingTimeout);
+        typedText.innerHTML = "";
+    }
+}
+
+// TYPEWRITER
+function typeWriter(){
+    let i = 0;
+    const speed = 20;
+    const target = document.getElementById("typedText");
+
+    function typing(){
+        if(i < text.length){
+            target.innerHTML += text.charAt(i) === "\n" ? "<br><br>" : text.charAt(i);
+            i++;
+            typingTimeout = setTimeout(typing, speed);
+        }
+    }
+    typing();
+}
+
+// VIRTUAL HUG
+function sendHug(event){
+    event.stopPropagation();
+    startMusic();
+
+    for(let i=0;i<10;i++){
+        const emoji = document.createElement("div");
+        emoji.classList.add("hug-emoji");
+        emoji.innerHTML = "🤗";
+        emoji.style.left = Math.random()*100 + "vw";
+        emoji.style.bottom = "0px";
+        document.body.appendChild(emoji);
+
+        setTimeout(()=>{
+            emoji.remove();
+        },3000);
+    }
+}
+
+// GALLERY
+let currentSlide = 0;
+const slides = document.querySelectorAll('.gallery img');
+
+function showSlide(index){
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+}
+
+function nextSlide(){
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+function prevSlide(){
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+}
+</script>
+
+</body>
+</html>
